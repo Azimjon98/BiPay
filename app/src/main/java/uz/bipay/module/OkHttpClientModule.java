@@ -1,6 +1,7 @@
 package uz.bipay.module;
 
 import android.content.Context;
+import android.util.Log;
 
 import java.io.File;
 import java.util.concurrent.TimeUnit;
@@ -54,7 +55,7 @@ OkHttpClientModule {
 
     @Provides
     public HttpLoggingInterceptor httpLoggingInterceptor() {
-        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor(message -> Timber.d(message));
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor(message -> Log.d("API_LOG",message));
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         return interceptor;
     }

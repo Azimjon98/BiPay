@@ -7,7 +7,7 @@ public class Constants {
 
 
     //dependency urls
-    public static final String BASE_URL = "https://api.bisyor.uz/api/v1/";
+    public static final String BASE_URL = "https://api.bepay.uz/api/v1/";
 
 
     //TODO: STATIC CONSTANTS

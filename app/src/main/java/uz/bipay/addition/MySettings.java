@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 
 import static uz.bipay.addition.Constants.IS_FIRST_ENTER;
 import static uz.bipay.addition.Constants.MY_TOKEN;
+import static uz.bipay.addition.Constants.USER_PHONE;
 
 public class MySettings {
     static private Context appContext;
@@ -46,6 +47,19 @@ public class MySettings {
         SharedPreferences preferences = appContext.getSharedPreferences("settings", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString(MY_TOKEN, token);
+        editor.apply();
+    }
+
+
+    public String getPhone() {
+        SharedPreferences preferences = appContext.getSharedPreferences("settings", Context.MODE_PRIVATE);
+        return preferences.getString(USER_PHONE, "");
+    }
+
+    public void setPhone(String phone) {
+        SharedPreferences preferences = appContext.getSharedPreferences("settings", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(USER_PHONE, phone);
         editor.apply();
     }
 

@@ -2,6 +2,7 @@ package uz.bipay.application;
 
 import android.app.Application;
 
+import uz.bipay.addition.MySettings;
 import uz.bipay.component.DaggerMyApplicationComponent;
 import uz.bipay.component.MyApplicationComponent;
 import uz.bipay.module.ContextModule;
@@ -22,6 +23,7 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         instance = this;
+        MySettings.initInstance(this.getBaseContext());
 
         myApplicationComponent = DaggerMyApplicationComponent.builder()
                 .contextModule(new ContextModule(this))
