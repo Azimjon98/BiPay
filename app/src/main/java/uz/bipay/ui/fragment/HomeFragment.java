@@ -3,6 +3,8 @@ package uz.bipay.ui.fragment;
 import android.app.Activity;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -53,6 +55,20 @@ public class HomeFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_home, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+
         ArrayList<CardItem> cardList = new ArrayList<>();
         cardList.add(new CardItem(R.drawable.uzcard,"UzCard"));
         cardList.add(new CardItem(R.drawable.humo,"HUMO"));
@@ -72,12 +88,5 @@ public class HomeFragment extends Fragment {
         cardAdapter = new CardAdapter(cardList);
         cardRecyclerView.setLayoutManager(cardLayoutManager);
         cardRecyclerView.setAdapter(cardAdapter);
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
     }
 }
