@@ -6,8 +6,8 @@ public class CardItem {
     private String cardName;
 
     public CardItem(int cardImage, String cardName) {
-        cardImage = cardImage;
-        cardName = cardName;
+        this.cardImage = cardImage;
+        this.cardName = cardName;
     }
 
     public int getCardImage() {

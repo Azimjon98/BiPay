@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import uz.bipay.Adapter.CardAdapter;
 import uz.bipay.R;
 import uz.bipay.recyclerView.CardItem;
+import uz.bipay.recyclerView.ReserveCardItem;
 
 
 public class HomeFragment extends Fragment {
@@ -49,6 +50,9 @@ public class HomeFragment extends Fragment {
     private RecyclerView cardRecyclerView;
     private RecyclerView.Adapter cardAdapter;
     private RecyclerView.LayoutManager cardLayoutManager;
+    private RecyclerView reserveCardRecyclerView;
+    private RecyclerView.Adapter reserveCardAdapter;
+    private RecyclerView.LayoutManager reserveCardLayoutManager;
 
 
     @Override
@@ -81,6 +85,19 @@ public class HomeFragment extends Fragment {
         cardList.add(new CardItem(R.drawable.paynet,"Paynet UZS"));
         cardList.add(new CardItem(R.drawable.payme,"Payme UZS"));
 
+        ArrayList<ReserveCardItem> reserveCardList = new ArrayList<>();
+        reserveCardList.add(new ReserveCardItem(R.drawable.uzcard,"UzCard","3000"));
+        reserveCardList.add(new ReserveCardItem(R.drawable.humo,"HUMO","5000"));
+        reserveCardList.add(new ReserveCardItem(R.drawable.click,"Click UZS","3000"));
+        reserveCardList.add(new ReserveCardItem(R.drawable.webmoney,"WebMoney RUB","5000"));
+        reserveCardList.add(new ReserveCardItem(R.drawable.webmoney,"WebMoney USD","4000"));
+        reserveCardList.add(new ReserveCardItem(R.drawable.qiwi,"Qiwi RUB","2500"));
+        reserveCardList.add(new ReserveCardItem(R.drawable.yandex,"Yandex RUB","3500"));
+        reserveCardList.add(new ReserveCardItem(R.drawable.beeline,"Beeline 1000 MB UZS","4500"));
+        reserveCardList.add(new ReserveCardItem(R.drawable.paynet,"Paynet UZS","4300"));
+        reserveCardList.add(new ReserveCardItem(R.drawable.payme,"Payme UZS","5000"));
+
+
 
         cardRecyclerView = view.findViewById(R.id.recyclerview_card);
         cardLayoutManager = new LinearLayoutManager(getContext());
@@ -88,5 +105,15 @@ public class HomeFragment extends Fragment {
         cardAdapter = new CardAdapter(cardList);
         cardRecyclerView.setLayoutManager(cardLayoutManager);
         cardRecyclerView.setAdapter(cardAdapter);
+
+        reserveCardRecyclerView = view.findViewById(R.id.recyclerview_reserve);
+        reserveCardLayoutManager = new LinearLayoutManager(getContext());
+        reserveCardRecyclerView.setHasFixedSize(true);
+        reserveCardAdapter = new CardAdapter(cardList);
+        reserveCardRecyclerView.setLayoutManager(reserveCardLayoutManager);
+        reserveCardRecyclerView.setAdapter(reserveCardAdapter);
+
+
+
     }
 }
