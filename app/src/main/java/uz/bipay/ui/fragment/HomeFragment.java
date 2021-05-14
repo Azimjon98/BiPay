@@ -12,16 +12,20 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
 
 import java.util.ArrayList;
 
 import uz.bipay.Adapter.CardAdapter;
+import uz.bipay.Adapter.ReserveCardAdapter;
 import uz.bipay.R;
 import uz.bipay.recyclerView.CardItem;
 import uz.bipay.recyclerView.ReserveCardItem;
 
 
-public class HomeFragment extends Fragment {
+public class HomeFragment<onViewCreated> extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -54,10 +58,26 @@ public class HomeFragment extends Fragment {
     private RecyclerView.Adapter reserveCardAdapter;
     private RecyclerView.LayoutManager reserveCardLayoutManager;
 
+    private final int ID_HOME = 1;
+    private final int ID_HISTORY = 2;
+    private final int ID_CARDS = 3;
+    private final int ID_NOTIFICATIONS = 4;
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        MeowBottomNavigation bottomNavigation = view.findViewById(R.id.bottomNavigation);
+        bottomNavigation.add(new MeowBottomNavigation.Model(ID_HOME,R.drawable.home_icon));
+        bottomNavigation.add(new MeowBottomNavigation.Model(ID_HISTORY,R.drawable.history_icon));
+        bottomNavigation.add(new MeowBottomNavigation.Model(ID_CARDS,R.drawable.cards_icon));
+        bottomNavigation.add(new MeowBottomNavigation.Model(ID_NOTIFICATIONS,R.drawable.notifications_icon));
+
+
+
+        bottomNavigation.setOnClickMenuListener(new MeowBottomNavigation.);
 
     }
 
@@ -66,6 +86,9 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home, container, false);
+
+
+
     }
 
     @Override
@@ -100,7 +123,7 @@ public class HomeFragment extends Fragment {
 
 
         cardRecyclerView = view.findViewById(R.id.recyclerview_card);
-        cardLayoutManager = new LinearLayoutManager(getContext());
+        cardLayoutManager = new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false);
         cardRecyclerView.setHasFixedSize(true);
         cardAdapter = new CardAdapter(cardList);
         cardRecyclerView.setLayoutManager(cardLayoutManager);
@@ -109,11 +132,9 @@ public class HomeFragment extends Fragment {
         reserveCardRecyclerView = view.findViewById(R.id.recyclerview_reserve);
         reserveCardLayoutManager = new LinearLayoutManager(getContext());
         reserveCardRecyclerView.setHasFixedSize(true);
-        reserveCardAdapter = new CardAdapter(cardList);
+        reserveCardAdapter = new ReserveCardAdapter(reserveCardList);
         reserveCardRecyclerView.setLayoutManager(reserveCardLayoutManager);
         reserveCardRecyclerView.setAdapter(reserveCardAdapter);
-
-
 
     }
 }

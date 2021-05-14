@@ -16,10 +16,13 @@ import uz.bipay.R;
 import uz.bipay.recyclerView.CardItem;
 
 public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder> {
-
+    Context context;
     private ArrayList<CardItem>CardList;
 
-
+    public CardAdapter(Context context, ArrayList<CardItem> cardList) {
+        this.context = context;
+        CardList = cardList;
+    }
 
     public static class CardViewHolder extends RecyclerView.ViewHolder{
 
