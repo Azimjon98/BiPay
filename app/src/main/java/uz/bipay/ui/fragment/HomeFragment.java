@@ -1,6 +1,5 @@
 package uz.bipay.ui.fragment;
 
-import android.app.Activity;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,11 +11,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
+import com.shrikanthravi.customnavigationdrawer2.data.MenuItem;
+import com.shrikanthravi.customnavigationdrawer2.widget.SNavigationDrawer;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import uz.bipay.Adapter.CardAdapter;
 import uz.bipay.Adapter.ReserveCardAdapter;
@@ -63,21 +64,12 @@ public class HomeFragment<onViewCreated> extends Fragment {
     private final int ID_CARDS = 3;
     private final int ID_NOTIFICATIONS = 4;
 
-
+    SNavigationDrawer sNavigationDrawer;
+    Class aClass;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        MeowBottomNavigation bottomNavigation = view.findViewById(R.id.bottomNavigation);
-        bottomNavigation.add(new MeowBottomNavigation.Model(ID_HOME,R.drawable.home_icon));
-        bottomNavigation.add(new MeowBottomNavigation.Model(ID_HISTORY,R.drawable.history_icon));
-        bottomNavigation.add(new MeowBottomNavigation.Model(ID_CARDS,R.drawable.cards_icon));
-        bottomNavigation.add(new MeowBottomNavigation.Model(ID_NOTIFICATIONS,R.drawable.notifications_icon));
-
-
-
-        bottomNavigation.setOnClickMenuListener(new MeowBottomNavigation.);
 
     }
 
@@ -136,5 +128,124 @@ public class HomeFragment<onViewCreated> extends Fragment {
         reserveCardRecyclerView.setLayoutManager(reserveCardLayoutManager);
         reserveCardRecyclerView.setAdapter(reserveCardAdapter);
 
+        MeowBottomNavigation bottomNavigation = view.findViewById(R.id.bottomNavigation);
+
+        bottomNavigation.add(new MeowBottomNavigation.Model(ID_HOME,R.drawable.home_icon));
+        bottomNavigation.add(new MeowBottomNavigation.Model(ID_HISTORY,R.drawable.history_icon));
+        bottomNavigation.add(new MeowBottomNavigation.Model(ID_CARDS,R.drawable.cards_icon));
+        bottomNavigation.add(new MeowBottomNavigation.Model(ID_NOTIFICATIONS,R.drawable.notifications_icon));
+
+        bottomNavigation.setOnClickMenuListener(model -> {
+            return null;
+        });
+
+        bottomNavigation.setOnShowListener(model -> {
+            String name;
+
+                switch (model.getId()){
+                    case ID_HOME: name = "Home";
+                    break;
+
+                    case ID_HISTORY: name = "History";
+                    break;
+
+                    case ID_CARDS: name = "Cards";
+                    break;
+
+                    case ID_NOTIFICATIONS: name = "Notifications";
+                    break;
+
+                    default: name = "";
+                }
+                return null;
+        });
+
+        bottomNavigation.setCount(ID_NOTIFICATIONS,"4");
+        bottomNavigation.show(ID_HOME,true);
+
+        //Assign vaariable of drawer menu
+        sNavigationDrawer = view.findViewById(R.id.headline_icon);
+
+        //Initialize menu item list
+        List<MenuItem> itemList = new ArrayList<>();
+        //Add menu item in list
+        itemList.add(new MenuItem("Exchange",R.drawable.cards_icon));
+        itemList.add(new MenuItem("Tariffs",R.drawable.tariffs_icon));
+        itemList.add(new MenuItem("News",R.drawable.speaker_icon));
+        itemList.add(new MenuItem("Chat",R.drawable.chat_icon));
+        itemList.add(new MenuItem("Info",R.drawable.info_icon));
+        //set menu item list
+        sNavigationDrawer.setMenuItemList(itemList);
+
+        //set default title
+        sNavigationDrawer.setAppbarTitleTV("Exchange");
+
+        //set default fragment
+        aClass = ExchangeFragment.class;
+
+        //open fragment
+        openFragment();
+
+        sNavigationDrawer.setOnMenuItemClickListener(new SNavigationDrawer.OnMenuItemClickListener() {
+            @Override
+            public void onMenuItemClicked(int position) {
+                switch (position){
+                    case 0:
+                        aClass = ExchangeFragment.class;
+                        break;
+                    case 1:
+
+
+                }
+            }
+        });
+
+        sNavigationDrawer.setDrawerListener(new SNavigationDrawer.DrawerListener() {
+            @Override
+            public void onDrawerOpening() {
+
+            }
+
+            @Override
+            public void onDrawerClosing() {
+                openFragment();
+            }
+
+            @Override
+            public void onDrawerOpened() {
+
+            }
+
+            @Override
+            public void onDrawerClosed() {
+
+            }
+
+            @Override
+            public void onDrawerStateChanged(int newState) {
+
+            }
+        });
     }
+
+    private void openFragment() {
+        try {
+            //Initialize fragment
+            Fragment fragment  = (Fragment) aClass.newInstance();
+            //open fragment
+            getSupportFragmentManager().beginTransaction()
+                    .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
+                    .replace(R.id.exchange_fragment,fragment) //check fragment
+                    .commit();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (java.lang.InstantiationException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void getSupportFragmentManager() {
+    }
+
+
 }

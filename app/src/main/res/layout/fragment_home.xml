@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#f5f5f7"
-    tools:context=".ui.fragment.HomeFragment">
+    tools:context=".ui.fragment.HomeFragment"
+    android:id="@+id/fragmentHome">
 
     <com.google.android.material.appbar.AppBarLayout
         app:layout_constraintStart_toStartOf="parent"
@@ -97,7 +98,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/recyclerview_card"
                 tools:ignore="MissingConstraints"
-                android:background="@color/white"
+                android:background="@drawable/textview_bg"
                 android:text="Reserve"
                 android:textSize="20dp"
                 android:textColor="@color/black"
@@ -108,7 +109,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/white"
+                android:background="@drawable/textview_bg"
                 android:id="@+id/recyclerview_reserve"
                 android:scrollbars="vertical"
                 android:padding="5dp"
@@ -120,17 +121,15 @@
             </androidx.recyclerview.widget.RecyclerView>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
-
     <com.etebarian.meowbottomnavigation.MeowBottomNavigation
         android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        app:mbn_shadowColor="@color/shadowColor"
-        app:mbn_backgroundBottomColor="@color/backgroundBottomColor"
-        app:mbn_circleColor="@color/circleColor"
+        app:mbn_backgroundBottomColor="@color/white"
         app:mbn_countBackgroundColor="@color/countBackgroundColor"
-        app:mbn_defaultIconColor="@color/defaultIconColor"
-        app:mbn_selectedIconColor="@color/selectedIconColor"/>
+        app:mbn_defaultIconColor="@color/selectedIconColor"
+        app:mbn_selectedIconColor="@color/selectedIconColor"
+        app:mbn_shadowColor="@color/shadowColor" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

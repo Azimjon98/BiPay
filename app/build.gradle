@@ -110,6 +110,8 @@ dependencies {
 
     implementation 'com.etebarian:meow-bottom-navigation:1.0.0'
     //animated bottom-navigation bar
+
+    implementation "com.github.shrikanth7698:Custom-Navigation-Drawer:0.0.1"
     //############################################################
 
     //glide
