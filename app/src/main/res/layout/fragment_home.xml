@@ -87,7 +87,8 @@
                 android:background="@color/gray"
                 android:id="@+id/recyclerview_card"
                 android:scrollbars="horizontal"
-                app:cardCornerRadius="20dp"/>
+                android:fadeScrollbars="true"
+                app:cardCornerRadius="20dp" />
 
             <TextView
                 android:layout_width="131dp"
@@ -121,15 +122,5 @@
             </androidx.recyclerview.widget.RecyclerView>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
-    <com.etebarian.meowbottomnavigation.MeowBottomNavigation
-        android:id="@+id/bottomNavigation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        app:mbn_backgroundBottomColor="@color/white"
-        app:mbn_countBackgroundColor="@color/countBackgroundColor"
-        app:mbn_defaultIconColor="@color/selectedIconColor"
-        app:mbn_selectedIconColor="@color/selectedIconColor"
-        app:mbn_shadowColor="@color/shadowColor" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
