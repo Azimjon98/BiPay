@@ -1,14 +1,20 @@
 package uz.bipay;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.navigation.Navigation;
 
 
 import android.annotation.SuppressLint;
+import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
+
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
 
 
@@ -21,7 +27,8 @@ public class MainActivity extends AppCompatActivity {
 
     private DrawerLayout drawer;
 
-    @SuppressLint("WrongViewCast")
+    @RequiresApi(api = Build.VERSION_CODES.P)
+    @SuppressLint({"WrongViewCast", "ResourceType"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,10 +68,18 @@ public class MainActivity extends AppCompatActivity {
 
         bottomNavigation.setCount(ID_NOTIFICATIONS,"4");
         bottomNavigation.show(ID_HOME,true);
-        
+
+        @SuppressLint("ResourceType") ImageView home_icon = findViewById(R.drawable.home_icon);
+        @SuppressLint("ResourceType") ImageView history_icon = findViewById(R.drawable.history_icon);
+        @SuppressLint("ResourceType") ImageView card_icon = findViewById(R.drawable.cards_icon);
+        @SuppressLint("ResourceType") ImageView notification_icon = findViewById(R.drawable.notifications_icon);
+
+
+
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
 
         drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawer,toolbar,
@@ -78,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
         if(drawer.isDrawerOpen(GravityCompat.START)){
             drawer.closeDrawer(GravityCompat.START);
         }else   {
-        super.onBackPressed();
+            super.onBackPressed();
         }
     }
 }

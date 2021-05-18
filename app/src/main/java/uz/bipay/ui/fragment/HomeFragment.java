@@ -5,13 +5,15 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
+import android.widget.ImageView;
+import android.widget.TextView;
 
 
 import java.util.ArrayList;
@@ -22,7 +24,6 @@ import uz.bipay.Adapter.ReserveCardAdapter;
 import uz.bipay.R;
 import uz.bipay.recyclerView.CardItem;
 import uz.bipay.recyclerView.ReserveCardItem;
-
 
 public class HomeFragment<onViewCreated> extends Fragment {
 
@@ -121,6 +122,7 @@ public class HomeFragment<onViewCreated> extends Fragment {
         reserveCardAdapter = new ReserveCardAdapter(reserveCardList);
         reserveCardRecyclerView.setLayoutManager(reserveCardLayoutManager);
         reserveCardRecyclerView.setAdapter(reserveCardAdapter);
+
 
     }
 
