@@ -59,7 +59,7 @@
                 android:id="@+id/headline_icon"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:src="@drawable/headline_icon"
+                tools:src="@drawable/headline_icon"
                 app:layout_constraintBottom_toBottomOf="@+id/home_logo"
                 app:layout_constraintTop_toTopOf="@+id/home_logo"
                 tools:ignore="MissingConstraints" />

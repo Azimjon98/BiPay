@@ -4,11 +4,13 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +23,7 @@ import java.util.List;
 
 import uz.bipay.Adapter.CardAdapter;
 import uz.bipay.Adapter.ReserveCardAdapter;
+import uz.bipay.MainActivity;
 import uz.bipay.R;
 import uz.bipay.recyclerView.CardItem;
 import uz.bipay.recyclerView.ReserveCardItem;
@@ -60,12 +63,19 @@ public class HomeFragment<onViewCreated> extends Fragment {
 
 
 
-
-
+    ImageView headline;
+    private DrawerLayout drawer;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        headline = headline.findViewById(R.id.headline_icon);
+        headline.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                drawer.openDrawer(Gravity.LEFT);
+            }
+        });
     }
 
     @Override
@@ -73,9 +83,6 @@ public class HomeFragment<onViewCreated> extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home, container, false);
-
-
-
     }
 
     @Override
@@ -124,6 +131,7 @@ public class HomeFragment<onViewCreated> extends Fragment {
         reserveCardRecyclerView.setAdapter(reserveCardAdapter);
 
 
+        ((MainActivity)getActivity()).openDrawer();
     }
 
 }
