@@ -69,7 +69,7 @@ public class HomeFragment<onViewCreated> extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        headline = headline.findViewById(R.id.headline_icon);
+        headline = view.findViewById(R.id.headline_icon);
         headline.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -122,6 +122,7 @@ public class HomeFragment<onViewCreated> extends Fragment {
         cardAdapter = new CardAdapter(cardList);
         cardRecyclerView.setLayoutManager(cardLayoutManager);
         cardRecyclerView.setAdapter(cardAdapter);
+        
 
         reserveCardRecyclerView = view.findViewById(R.id.recyclerview_reserve);
         reserveCardLayoutManager = new LinearLayoutManager(getContext());
@@ -132,6 +133,9 @@ public class HomeFragment<onViewCreated> extends Fragment {
 
 
         ((MainActivity)getActivity()).openDrawer();
+
+
     }
+
 
 }

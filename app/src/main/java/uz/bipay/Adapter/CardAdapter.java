@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -19,9 +20,13 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
     Context context;
     private ArrayList<CardItem>CardList;
 
+    private ImageView recycleImage;
+
+
     public CardAdapter(Context context, ArrayList<CardItem> cardList) {
         this.context = context;
         CardList = cardList;
+
     }
 
     public static class CardViewHolder extends RecyclerView.ViewHolder{
@@ -33,7 +38,14 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
             super(itemView);
             CardImage = itemView.findViewById(R.id.cardImage);
             CardName =  itemView.findViewById(R.id.cardName);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Navigation.findNavController(itemView);
+                }
+            });
         }
+
     }
     public CardAdapter( ArrayList<CardItem> cardList){
         this.CardList = cardList;
@@ -54,10 +66,15 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
         holder.CardName.setText(currentItem.getCardName());
         holder.CardImage.setImageResource(CardList.get(position).getCardImage());
         holder.CardName.setText(CardList.get(position).getCardName());
+
     }
 
     @Override
     public int getItemCount() {
         return CardList.size();
+    }
+
+    public interface OnItemClickListener {
+        public void onItemClick(int position);
     }
 }
