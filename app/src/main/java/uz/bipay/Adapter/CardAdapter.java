@@ -41,7 +41,8 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Navigation.findNavController(itemView);
+                    Navigation.findNavController(itemView).navigate(R.id.homeFragment_to_reserveFragment);
+
                 }
             });
         }

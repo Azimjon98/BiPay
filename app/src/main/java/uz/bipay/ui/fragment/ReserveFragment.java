@@ -4,103 +4,82 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
-
 
 import java.util.ArrayList;
-import java.util.List;
 
-import uz.bipay.Adapter.CardAdapter;
 import uz.bipay.Adapter.ReserveCardAdapter;
-import uz.bipay.MainActivity;
 import uz.bipay.R;
-import uz.bipay.recyclerView.CardItem;
 import uz.bipay.recyclerView.ReserveCardItem;
 
-public class HomeFragment<onViewCreated> extends Fragment {
+/**
+ * A simple {@link Fragment} subclass.
+ * Use the {@link ReserveFragment#newInstance} factory method to
+ * create an instance of this fragment.
+ */
+public class ReserveFragment extends Fragment {
+
+    private RecyclerView reserveCardRecyclerView;
+    private RecyclerView.Adapter reserveCardAdapter;
+    private RecyclerView.LayoutManager reserveCardLayoutManager;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    private View view;
 
     // TODO: Rename and change types of parameters
+    private String mParam1;
+    private String mParam2;
 
-
-    public HomeFragment() {
+    public ReserveFragment() {
         // Required empty public constructor
-
     }
 
-
+    /**
+     * Use this factory method to create a new instance of
+     * this fragment using the provided parameters.
+     *
+     * @param param1 Parameter 1.
+     * @param param2 Parameter 2.
+     * @return A new instance of fragment ReserveFragment.
+     */
     // TODO: Rename and change types and number of parameters
-    public static HomeFragment newInstance(String param1, String param2) {
-        HomeFragment fragment = new HomeFragment();
+    public static ReserveFragment newInstance(String param1, String param2) {
+        ReserveFragment fragment = new ReserveFragment();
         Bundle args = new Bundle();
-
+        args.putString(ARG_PARAM1, param1);
+        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
 
-    private RecyclerView cardRecyclerView;
-    private RecyclerView.Adapter cardAdapter;
-    private RecyclerView.LayoutManager cardLayoutManager;
-    private RecyclerView reserveCardRecyclerView;
-    private RecyclerView.Adapter reserveCardAdapter;
-    private RecyclerView.LayoutManager reserveCardLayoutManager;
 
-
-
-    ImageView headline;
-    private DrawerLayout drawer;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        if (getArguments() != null) {
+            mParam1 = getArguments().getString(ARG_PARAM1);
+            mParam2 = getArguments().getString(ARG_PARAM2);
+        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        return inflater.inflate(R.layout.fragment_reserve, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        headline = view.findViewById(R.id.headline_icon);
-        headline.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((MainActivity)getActivity()).openDrawer();
-            }
-        });
-
-        ArrayList<CardItem> cardList = new ArrayList<>();
-        cardList.add(new CardItem(R.drawable.uzcard,"UzCard"));
-        cardList.add(new CardItem(R.drawable.humo,"HUMO"));
-        cardList.add(new CardItem(R.drawable.click,"Click UZS"));
-        cardList.add(new CardItem(R.drawable.webmoney,"WebMoney RUB"));
-        cardList.add(new CardItem(R.drawable.webmoney,"WebMoney USD"));
-        cardList.add(new CardItem(R.drawable.qiwi,"Qiwi RUB"));
-        cardList.add(new CardItem(R.drawable.yandex,"Yandex RUB"));
-        cardList.add(new CardItem(R.drawable.beeline,"Beeline 1000 MB UZS"));
-        cardList.add(new CardItem(R.drawable.paynet,"Paynet UZS"));
-        cardList.add(new CardItem(R.drawable.payme,"Payme UZS"));
 
         ArrayList<ReserveCardItem> reserveCardList = new ArrayList<>();
         reserveCardList.add(new ReserveCardItem(R.drawable.uzcard,"UzCard","3000"));
@@ -114,28 +93,12 @@ public class HomeFragment<onViewCreated> extends Fragment {
         reserveCardList.add(new ReserveCardItem(R.drawable.paynet,"Paynet UZS","4300"));
         reserveCardList.add(new ReserveCardItem(R.drawable.payme,"Payme UZS","5000"));
 
-
-
-        cardRecyclerView = view.findViewById(R.id.recyclerview_card);
-        cardLayoutManager = new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false);
-        cardRecyclerView.setHasFixedSize(true);
-        cardAdapter = new CardAdapter(cardList);
-        cardRecyclerView.setLayoutManager(cardLayoutManager);
-        cardRecyclerView.setAdapter(cardAdapter);
-        
-
-        reserveCardRecyclerView = view.findViewById(R.id.recyclerview_reserve);
+        reserveCardRecyclerView = view.findViewById(R.id.recycleview_reservedMoney);
         reserveCardLayoutManager = new LinearLayoutManager(getContext());
         reserveCardRecyclerView.setHasFixedSize(true);
         reserveCardAdapter = new ReserveCardAdapter(reserveCardList);
         reserveCardRecyclerView.setLayoutManager(reserveCardLayoutManager);
         reserveCardRecyclerView.setAdapter(reserveCardAdapter);
 
-
-        ((MainActivity)getActivity()).openDrawer();
-
-
     }
-
-
 }

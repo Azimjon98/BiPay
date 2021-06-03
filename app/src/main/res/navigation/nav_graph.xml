@@ -72,11 +72,14 @@
             android:id="@+id/homeFragment_to_historyFragment"
             app:destination="@id/historyFragment" />
         <action
-            android:id="@+id/action_homeFragment_to_cardFragment"
+            android:id="@+id/homeFragment_to_cardFragment"
             app:destination="@id/cardFragment" />
         <action
-            android:id="@+id/action_homeFragment_to_notificationsFragment"
+            android:id="@+id/homeFragment_to_notificationsFragment"
             app:destination="@id/notificationsFragment" />
+        <action
+            android:id="@+id/homeFragment_to_reserveFragment"
+            app:destination="@id/reserveFragment" />
     </fragment>
     <fragment
         android:id="@+id/historyFragment"
@@ -93,4 +96,9 @@
         android:name="uz.bipay.ui.fragment.NotificationsFragment"
         android:label="fragment_notifications"
         tools:layout="@layout/fragment_notifications" />
+    <fragment
+        android:id="@+id/reserveFragment"
+        android:name="uz.bipay.ui.fragment.ReserveFragment"
+        android:label="fragment_reserve"
+        tools:layout="@layout/fragment_reserve" />
 </navigation>
