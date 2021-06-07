@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -27,6 +28,12 @@ public class ReserveCardAdapter extends RecyclerView.Adapter<ReserveCardAdapter.
             reserveCardImage = itemView.findViewById(R.id.reservedCardImage);
             reserveCardName = itemView.findViewById(R.id.reservedCardName);
             reserveMoney = itemView.findViewById(R.id.reservedMoney);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Navigation.findNavController(itemView).navigate(R.id.homeFragment_to_exchangeFragment);
+                }
+            });
         }
     }
 
