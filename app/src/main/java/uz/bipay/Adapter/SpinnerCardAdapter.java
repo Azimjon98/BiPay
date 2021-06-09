@@ -17,12 +17,13 @@ import java.util.ArrayList;
 import javax.xml.parsers.SAXParser;
 
 import uz.bipay.R;
+import uz.bipay.recyclerView.SpinnerCardItem;
 import uz.bipay.ui.fragment.ExchangeFragment;
 import uz.bipay.ui.fragment.SpinnerCards;
 
-public class SpinnerCardAdapter extends ArrayAdapter<SpinnerCards> {
-    public SpinnerCardAdapter(ExchangeFragment context, ArrayList<SpinnerCards> spinnerCardsList) {
-        super (context,0,spinnerCardsList);
+public class SpinnerCardAdapter extends ArrayAdapter<SpinnerCardItem> {
+    public SpinnerCardAdapter(Context context, ArrayList<SpinnerCardItem> spinnerCardsList) {
+        super(context,0,spinnerCardsList);
     }
 
     @NonNull
@@ -43,7 +44,7 @@ public class SpinnerCardAdapter extends ArrayAdapter<SpinnerCards> {
         ImageView imageViewSpinnerCard = convertView.findViewById(R.id.spinner_image_view);
         TextView textViewSpinnerCardName = convertView.findViewById(R.id.spinner_cardName);
 
-        SpinnerCards currentSpinnerCardItem = getItem(position);
+        SpinnerCardItem currentSpinnerCardItem = getItem(position);
 
         if(currentSpinnerCardItem != null) {
             imageViewSpinnerCard.setImageResource(currentSpinnerCardItem.getSpinnerCardImage());

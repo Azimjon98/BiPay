@@ -65,6 +65,12 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/home_scroll_view"
+        android:background="@color/white"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -95,25 +101,261 @@
 
         <androidx.appcompat.widget.AppCompatSpinner
             android:id="@+id/spinner"
-            android:layout_width="97dp"
-            android:layout_height="23dp"
-            android:layout_marginTop="20dp"
+            android:layout_width="125dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="28dp"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_give"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="27dp" />
+            tools:ignore="MissingConstraints" />
 
         <TextView
             android:id="@+id/text_give"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="28dp"
             android:text="You give"
-            android:textSize="20dp"
             android:textColor="@color/black"
+            android:textSize="13dp"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView3"
-            tools:layout_editor_absoluteX="40dp"
             tools:ignore="MissingConstraints" />
 
+        <TextView
+            android:id="@+id/text_fromAccaount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="80dp"
+
+            android:text="From Account"
+            android:textColor="@color/black"
+            android:textSize="13dp"
+            app:layout_constraintStart_toEndOf="@+id/text_give"
+            app:layout_constraintTop_toTopOf="@+id/text_give"
+            tools:ignore="MissingConstraints" />
+
+        <EditText
+            android:id="@+id/edit_fromAccount"
+            android:layout_width="144dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:ems="4"
+            android:inputType="number"
+            android:text=""
+            app:layout_constraintBottom_toBottomOf="@+id/spinner"
+            app:layout_constraintStart_toEndOf="@+id/spinner"
+            app:layout_constraintTop_toTopOf="@+id/spinner"
+            tools:ignore="MissingConstraints" />
+
+        <EditText
+            android:id="@+id/from_summa"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:ems="4"
+            android:inputType="textPersonName"
+            android:text=""
+            app:layout_constraintBottom_toBottomOf="@+id/edit_fromAccount"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/edit_fromAccount"
+            app:layout_constraintTop_toTopOf="@+id/edit_fromAccount"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
+            android:text="Summa"
+            android:textColor="@color/black"
+            android:textSize="12dp"
+            app:layout_constraintBottom_toBottomOf="@+id/text_fromAccaount"
+            app:layout_constraintStart_toEndOf="@+id/text_fromAccaount"
+            app:layout_constraintTop_toTopOf="@+id/text_fromAccaount"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/text_receive"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="20dp"
+            android:text="Receive"
+            android:textColor="@color/black"
+            android:textSize="13dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spinner"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/text_toAccount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="80dp"
+            android:text="To Account"
+            android:textColor="@color/black"
+            android:textSize="13dp"
+            app:layout_constraintBottom_toBottomOf="@+id/text_receive"
+            app:layout_constraintStart_toEndOf="@+id/text_receive"
+            app:layout_constraintTop_toTopOf="@+id/text_receive" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="80dp"
+            android:text="Summa"
+            android:textColor="@color/black"
+            android:textSize="13dp"
+            app:layout_constraintBottom_toBottomOf="@+id/text_toAccount"
+            app:layout_constraintStart_toEndOf="@+id/text_toAccount"
+            app:layout_constraintTop_toTopOf="@+id/text_toAccount" />
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/spinner_receive"
+            android:layout_width="125dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="28dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_receive"
+            tools:ignore="MissingConstraints" />
+
+        <EditText
+            android:id="@+id/edit_toAccount"
+            android:layout_width="144dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:ems="4"
+            android:inputType="number"
+            android:text=""
+            app:layout_constraintBottom_toBottomOf="@+id/spinner_receive"
+            app:layout_constraintStart_toEndOf="@+id/spinner_receive"
+            app:layout_constraintTop_toTopOf="@+id/spinner_receive"
+            tools:ignore="MissingConstraints" />
+
+        <EditText
+            android:id="@+id/to_summa"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:ems="4"
+            android:inputType="textPersonName"
+            android:text=""
+            app:layout_constraintBottom_toBottomOf="@+id/edit_toAccount"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/edit_toAccount"
+            app:layout_constraintTop_toTopOf="@+id/edit_toAccount"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/text_firstName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="20dp"
+            android:text="First Name"
+            android:textColor="@color/black"
+            android:textSize="13dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spinner_receive"
+            tools:ignore="MissingConstraints" />
+
+        <EditText
+            android:id="@+id/edit_firstName"
+            android:layout_width="150dp"
+            android:layout_height="40dp"
+            android:hint="First Name"
+            android:textColor="@color/black"
+            android:textAlignment="viewStart"
+            android:textColorHint="#918A8A"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_firstName"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/text_lastName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="150dp"
+            android:text="Last Name"
+            android:textColor="@color/black"
+            android:textSize="13dp"
+            app:layout_constraintBottom_toBottomOf="@+id/text_firstName"
+            app:layout_constraintStart_toEndOf="@+id/text_firstName"
+            app:layout_constraintTop_toTopOf="@+id/text_firstName"
+            tools:ignore="MissingConstraints" />
+
+        <EditText
+            android:id="@+id/edit_lastName"
+            android:layout_width="150dp"
+            android:layout_height="40dp"
+            android:hint="Last Name"
+            android:textColorHint="#918A8A"
+            android:textAlignment="viewStart"
+            android:textColor="@color/black"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="12dp"
+            app:layout_constraintStart_toEndOf="@+id/edit_firstName"
+            app:layout_constraintTop_toBottomOf="@+id/text_lastName"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/text_phoneNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="20dp"
+            android:text="Phone Number"
+            android:textColor="@color/black"
+            android:textSize="13dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edit_firstName"
+            tools:ignore="MissingConstraints" />
+
+        <EditText
+            android:id="@+id/edit_phoneNumber"
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
+            android:inputType="phone"
+            android:maxLength="9"
+            android:hint="+998"
+            android:textColorHint="#918A8A"
+            android:textColor="@color/black"
+            android:textAlignment="viewStart"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_phoneNumber"
+            tools:ignore="MissingConstraints" />
+
+        <Button
+            android:id="@+id/payment"
+            android:layout_width="250dp"
+            android:layout_height="48dp"
+            android:layout_marginBottom="24dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/selector_button"
+            android:onClick="MakePayment"
+            android:text="Payment"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edit_phoneNumber"
+            tools:ignore="OnClick" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
 </FrameLayout>

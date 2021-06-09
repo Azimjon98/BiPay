@@ -12,13 +12,16 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import uz.bipay.Adapter.CardAdapter;
 import uz.bipay.Adapter.SpinnerCardAdapter;
+import uz.bipay.MainActivity;
 import uz.bipay.R;
+import uz.bipay.recyclerView.SpinnerCardItem;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -27,7 +30,7 @@ import uz.bipay.R;
  */
 public class ExchangeFragment extends Fragment {
 
-    private ArrayList<SpinnerCards> mSpinnerCardList;
+    private ArrayList<SpinnerCardItem> mSpinnerCardList;
     private SpinnerCardAdapter mSpinnerAdapter;
 
     // TODO: Rename parameter arguments, choose names that match
@@ -81,16 +84,33 @@ public class ExchangeFragment extends Fragment {
         initList();
 
         Spinner spinnerCards = (Spinner) view.findViewById(R.id.spinner);
+        Spinner spinnerCardsReceive = (Spinner) view.findViewById(R.id.spinner_receive);
 
-        mSpinnerAdapter = new SpinnerCardAdapter(this,mSpinnerCardList);
+        mSpinnerAdapter = new SpinnerCardAdapter(getContext(),mSpinnerCardList);
         spinnerCards.setAdapter(mSpinnerAdapter);
+
+        mSpinnerAdapter = new SpinnerCardAdapter(getContext(),mSpinnerCardList);
+        spinnerCardsReceive.setAdapter(mSpinnerAdapter);
 
         spinnerCards.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                SpinnerCards clickedSpinnerItem = (SpinnerCards) parent.getItemAtPosition(position);
+                SpinnerCardItem clickedSpinnerItem = (SpinnerCardItem) parent.getItemAtPosition(position);
                 String clickedSpinnerCardName = clickedSpinnerItem.getSpinnerCardName();
 
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        spinnerCardsReceive.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                SpinnerCardItem clickedSpinnerItem = (SpinnerCardItem) parent.getItemAtPosition(position);
+                String clickedSpinnerCardName = clickedSpinnerItem.getSpinnerCardName();
             }
 
             @Override
@@ -102,15 +122,15 @@ public class ExchangeFragment extends Fragment {
 
     private void initList(){
         mSpinnerCardList = new ArrayList<>();
-        mSpinnerCardList.add(new SpinnerCards("Uzcard",R.drawable.uzcard));
-        mSpinnerCardList.add(new SpinnerCards("HUMO",R.drawable.humo));
-        mSpinnerCardList.add(new SpinnerCards("Click UZS",R.drawable.click));
-        mSpinnerCardList.add(new SpinnerCards("WebMoney RUB",R.drawable.webmoney));
-        mSpinnerCardList.add(new SpinnerCards("WebMoney USD",R.drawable.webmoney));
-        mSpinnerCardList.add(new SpinnerCards("Qiwi RUB",R.drawable.qiwi));
-        mSpinnerCardList.add(new SpinnerCards("Yandex RUB",R.drawable.yandex));
-        mSpinnerCardList.add(new SpinnerCards("Beeline 1000 MB UZS",R.drawable.beeline));
-        mSpinnerCardList.add(new SpinnerCards("Paynet UZS",R.drawable.paynet));
-        mSpinnerCardList.add(new SpinnerCards("Payme UZS",R.drawable.payme));
+        mSpinnerCardList.add(new SpinnerCardItem("Uzcard",R.drawable.uzcard));
+        mSpinnerCardList.add(new SpinnerCardItem("HUMO",R.drawable.humo));
+        mSpinnerCardList.add(new SpinnerCardItem("Click UZS",R.drawable.click));
+        mSpinnerCardList.add(new SpinnerCardItem("WebMoney RUB",R.drawable.webmoney));
+        mSpinnerCardList.add(new SpinnerCardItem("WebMoney USD",R.drawable.webmoney));
+        mSpinnerCardList.add(new SpinnerCardItem("Qiwi RUB",R.drawable.qiwi));
+        mSpinnerCardList.add(new SpinnerCardItem("Yandex RUB",R.drawable.yandex));
+        mSpinnerCardList.add(new SpinnerCardItem("Beeline 1000 MB UZS",R.drawable.beeline));
+        mSpinnerCardList.add(new SpinnerCardItem("Paynet UZS",R.drawable.paynet));
+        mSpinnerCardList.add(new SpinnerCardItem("Payme UZS",R.drawable.payme));
     }
 }
