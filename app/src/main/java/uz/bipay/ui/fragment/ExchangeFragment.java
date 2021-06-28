@@ -5,12 +5,16 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -30,6 +34,8 @@ import uz.bipay.recyclerView.SpinnerCardItem;
  */
 public class ExchangeFragment extends Fragment {
 
+    EditText fromAccount, toAccount, fromSumma, toSumma, firstName, lastName, phoneNumber;
+    Button payment;
     private ArrayList<SpinnerCardItem> mSpinnerCardList;
     private SpinnerCardAdapter mSpinnerAdapter;
 
@@ -118,6 +124,40 @@ public class ExchangeFragment extends Fragment {
 
             }
         });
+
+        fromAccount = view.findViewById(R.id.edit_fromAccount);
+        fromSumma = view.findViewById(R.id.from_summa);
+        toAccount = view.findViewById(R.id.edit_toAccount);
+        toSumma = view.findViewById(R.id.to_summa);
+        firstName = view.findViewById(R.id.edit_firstName);
+        lastName = view.findViewById(R.id.edit_lastName);
+        phoneNumber = view.findViewById(R.id.edit_phoneNumber);
+        payment = view.findViewById(R.id.payment);
+
+        NavController navController = Navigation.findNavController(view);
+
+        payment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String finalPhoneNumber = "+998" + phoneNumber.getText().toString();
+                if (fromAccount.equals("") || fromAccount.length()< 16 || fromAccount.length()> 16 ){
+                    Toast.makeText(getContext(),"Please Sending Account",Toast.LENGTH_LONG).show(); }
+                else if (fromSumma.equals("")){
+                    Toast.makeText(getContext(),"Please field Summa",Toast.LENGTH_LONG).show();}
+                else if (toAccount.equals("")|| toAccount.length()< 16 || toAccount.length()> 16){
+                    Toast.makeText(getContext(),"Please add Reciever Account",Toast.LENGTH_LONG).show();}
+                else if (toSumma.equals("")){
+                    Toast.makeText(getContext(),"Please field Summa",Toast.LENGTH_LONG).show();}
+                else if (firstName.equals("")){
+                    Toast.makeText(getContext(),"Please add First Name",Toast.LENGTH_LONG).show();}
+                else if (lastName.equals("")){
+                    Toast.makeText(getContext(),"Please add Last Name",Toast.LENGTH_LONG).show();}
+                else if (finalPhoneNumber.equals("") || finalPhoneNumber.length() < 13 || finalPhoneNumber.length()>13 ){
+                    Toast.makeText(getContext(),"Please field phone number",Toast.LENGTH_LONG).show();}
+            }
+        });
+
+
     }
 
     private void initList(){

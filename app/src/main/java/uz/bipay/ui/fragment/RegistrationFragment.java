@@ -95,7 +95,7 @@ public class RegistrationFragment extends Fragment {
                 }else if (finalPhoneNumber.length()< 13 || finalPhoneNumber.length() > 13 ){
                     Toast.makeText(getContext(),"You have entered More Or Less numbers ",Toast.LENGTH_LONG).show();
                 }else  {
-                    requestCode(finalPhoneNumber);
+                       requestCode(finalPhoneNumber);
                 }
             }
 
@@ -110,7 +110,7 @@ public class RegistrationFragment extends Fragment {
                 .enqueue(new Callback<RegistrationResponse>() {
                     @Override
                     public void onResponse(Call<RegistrationResponse> call, Response<RegistrationResponse> response) {
-                        System.out.println("in b");
+                           System.out.println("in b");
                         if (response.isSuccessful()){
                             MySettings.getInstance().setPhone(phone);
                             Bundle bundle = new Bundle();

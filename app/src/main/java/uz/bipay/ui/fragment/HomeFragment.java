@@ -20,11 +20,13 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.jar.Attributes;
 
 import uz.bipay.Adapter.CardAdapter;
 import uz.bipay.Adapter.ReserveCardAdapter;
 import uz.bipay.MainActivity;
 import uz.bipay.R;
+import uz.bipay.module.CardModule;
 import uz.bipay.recyclerView.CardItem;
 import uz.bipay.recyclerView.ReserveCardItem;
 
@@ -82,14 +84,6 @@ public class HomeFragment<onViewCreated> extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        headline = view.findViewById(R.id.headline_icon);
-        headline.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((MainActivity)getActivity()).openDrawer();
-            }
-        });
-
         ArrayList<CardItem> cardList = new ArrayList<>();
         cardList.add(new CardItem(R.drawable.uzcard,"UzCard"));
         cardList.add(new CardItem(R.drawable.humo,"HUMO"));
@@ -134,7 +128,18 @@ public class HomeFragment<onViewCreated> extends Fragment {
 
         ((MainActivity)getActivity()).openDrawer();
 
+    }
 
+    public class paidSerive {
+        public int id;
+        public CardModule cardModule;
+        public String name;
+        public String key;
+        public String logo;
+        public int reserve;
+        public int currency_id;
+        public String currencyName;
+        public String  placeHolder;
     }
 
 
