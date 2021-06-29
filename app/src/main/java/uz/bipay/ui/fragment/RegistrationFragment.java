@@ -1,8 +1,6 @@
 package uz.bipay.ui.fragment;
 
-import android.app.Application;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -17,23 +15,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
-
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
-import uz.bipay.MainActivity;
 import uz.bipay.R;
 import uz.bipay.addition.MySettings;
 import uz.bipay.application.MyApplication;
-import uz.bipay.component.MyApplicationComponent;
-import uz.bipay.data.model.RegistrationRequest;
-import uz.bipay.data.model.response.RegistrationResponse;
-import uz.bipay.module.RetrofitModule;
+import uz.bipay.data.request.RegistrationRequest;
+import uz.bipay.data.response.RegistrationResponse;
 
 /**
  * A simple {@link Fragment} subclass.

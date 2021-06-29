@@ -1,15 +1,15 @@
-package uz.bipay.data.model.response;
+package uz.bipay.data.response;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class PaymentResponseServices implements Serializable {
+public class LoginResponse implements Serializable {
     @Expose
     @SerializedName("status")
-    String payment;
+    String login;
     @Expose
-    @SerializedName("status")
-    String paymentSumma;
+    @SerializedName("message")
+    String password;
 }

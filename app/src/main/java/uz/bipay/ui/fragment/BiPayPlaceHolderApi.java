@@ -1,27 +1,22 @@
 package uz.bipay.ui.fragment;
 
-import android.content.pm.ServiceInfo;
-
 import java.util.List;
 
 import retrofit2.Call;
-import retrofit2.Callback;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
-import retrofit2.http.Query;
-import uz.bipay.data.model.LoginRequest;
-import uz.bipay.data.model.RegistrationRequest;
-import uz.bipay.data.model.ResetPasswordRequest;
-import uz.bipay.data.model.SetPasswordRequest;
-import uz.bipay.data.model.VerificationRequest;
-import uz.bipay.data.model.response.CardModuleResponse;
-import uz.bipay.data.model.response.LoginResponse;
-import uz.bipay.data.model.response.PaymentResponseServices;
-import uz.bipay.data.model.response.RegistrationResponse;
-import uz.bipay.data.model.response.ResetPasswordResponse;
-import uz.bipay.data.model.response.SetPasswordResponse;
-import uz.bipay.data.model.response.VerificationResponse;
+import uz.bipay.data.model.PaymentServiceModel;
+import uz.bipay.data.request.LoginRequest;
+import uz.bipay.data.request.RegistrationRequest;
+import uz.bipay.data.request.ResetPasswordRequest;
+import uz.bipay.data.request.SetPasswordRequest;
+import uz.bipay.data.request.VerificationRequest;
+import uz.bipay.data.response.LoginResponse;
+import uz.bipay.data.response.RegistrationResponse;
+import uz.bipay.data.response.ResetPasswordResponse;
+import uz.bipay.data.response.SetPasswordResponse;
+import uz.bipay.data.response.VerificationResponse;
 import uz.bipay.module.CardModule;
 
 public interface BiPayPlaceHolderApi {
@@ -39,17 +34,12 @@ public interface BiPayPlaceHolderApi {
    // Call<PaymentResponseServices> paymentRequest(@Body PaymentRequest body);
 
     @GET("/additional/payment-service")
-    public void paymentServiceStatus (
-            @Query("id") int id,
-            @Query("name") String name,
-            @Query("key") String key,
-            @Query("logo") String logo,
-            @Query("reserve") int reserve,
-            @Query("currency_id") String currency_id,
-            @Query("currencyName") String currencyName,
-            @Query("placeHolder") String placeHolder,
-            Callback<CardModuleResponse> callback
-    );
+    public Call<List<PaymentServiceModel>> getpaymentServices ();
+
+
+    //request da hech narsa bumidi degani metod ichida hech narsa bumid
+//buldi shunaqa qib ishlatasan
+    //response keladimi endib boldimi? shu respose
 
 
     Call<CardModule> services();

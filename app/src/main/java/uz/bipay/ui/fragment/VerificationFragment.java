@@ -1,7 +1,6 @@
 package uz.bipay.ui.fragment;
 
 import android.content.Context;
-import android.icu.util.ULocale;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.SpannableString;
@@ -22,8 +21,6 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
-import com.readystatesoftware.chuck.internal.ui.MainActivity;
-
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
@@ -34,10 +31,10 @@ import retrofit2.Retrofit;
 import uz.bipay.R;
 import uz.bipay.addition.MySettings;
 import uz.bipay.application.MyApplication;
-import uz.bipay.data.model.RegistrationRequest;
-import uz.bipay.data.model.VerificationRequest;
-import uz.bipay.data.model.response.RegistrationResponse;
-import uz.bipay.data.model.response.VerificationResponse;
+import uz.bipay.data.request.RegistrationRequest;
+import uz.bipay.data.request.VerificationRequest;
+import uz.bipay.data.response.RegistrationResponse;
+import uz.bipay.data.response.VerificationResponse;
 
 public class VerificationFragment extends Fragment {
     TextView timer;

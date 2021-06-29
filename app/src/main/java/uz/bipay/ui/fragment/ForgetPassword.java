@@ -24,8 +24,8 @@ import retrofit2.Retrofit;
 import uz.bipay.R;
 import uz.bipay.addition.MySettings;
 import uz.bipay.application.MyApplication;
-import uz.bipay.data.model.RegistrationRequest;
-import uz.bipay.data.model.response.RegistrationResponse;
+import uz.bipay.data.request.RegistrationRequest;
+import uz.bipay.data.response.RegistrationResponse;
 
 public class ForgetPassword extends Fragment {
 

@@ -1,4 +1,4 @@
-package uz.bipay.data.model;
+package uz.bipay.data.request;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

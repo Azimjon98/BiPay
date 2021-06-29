@@ -1,25 +1,25 @@
-package uz.bipay.data.model;
+package uz.bipay.data.request;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class LoginRequest {
+public class VerificationRequest {
     @Expose
     @SerializedName("login")
     String login;
     @Expose
-    @SerializedName("password")
-    String password;
+    @SerializedName("code")
+    String code;
     @Expose
     @SerializedName("lang")
     String lang;
-    public LoginRequest(){
 
+    public VerificationRequest() {
     }
 
-    public LoginRequest(String login, String password, String lang) {
+    public VerificationRequest(String login,String code, String lang) {
         this.login = login;
-        this.password = password;
+        this.code = code;
         this.lang = lang;
     }
 }

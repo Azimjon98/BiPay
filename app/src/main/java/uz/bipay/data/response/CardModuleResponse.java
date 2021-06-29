@@ -1,7 +1,4 @@
-package uz.bipay.data.model.response;
-
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
+package uz.bipay.data.response;
 
 import java.io.Serializable;
 

@@ -1,5 +1,6 @@
 package uz.bipay.ui.fragment;
 
+import android.app.Application;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -22,55 +23,44 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.jar.Attributes;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import uz.bipay.Adapter.CardAdapter;
 import uz.bipay.Adapter.ReserveCardAdapter;
 import uz.bipay.MainActivity;
 import uz.bipay.R;
+import uz.bipay.application.MyApplication;
+import uz.bipay.data.model.PaymentServiceModel;
 import uz.bipay.module.CardModule;
 import uz.bipay.recyclerView.CardItem;
 import uz.bipay.recyclerView.ReserveCardItem;
 
-public class HomeFragment<onViewCreated> extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-    private View view;
-
-    // TODO: Rename and change types of parameters
-
-
-    public HomeFragment() {
-        // Required empty public constructor
-
-    }
-
-
-    // TODO: Rename and change types and number of parameters
-    public static HomeFragment newInstance(String param1, String param2) {
-        HomeFragment fragment = new HomeFragment();
-        Bundle args = new Bundle();
-
-        fragment.setArguments(args);
-        return fragment;
-    }
+public class HomeFragment extends Fragment {
 
     private RecyclerView cardRecyclerView;
-    private RecyclerView.Adapter cardAdapter;
+    //adapterni aniq etda
+    private CardAdapter cardAdapter;
     private RecyclerView.LayoutManager cardLayoutManager;
     private RecyclerView reserveCardRecyclerView;
-    private RecyclerView.Adapter reserveCardAdapter;
+    private ReserveCardAdapter reserveCardAdapter;
     private RecyclerView.LayoutManager reserveCardLayoutManager;
 
+    private BiPayPlaceHolderApi api;
+    private PaymentServiceModel paymentServiceModel;
 
-
-    ImageView headline;
-    private DrawerLayout drawer;
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        try {
+            api =  MyApplication.getInstance()
+                    .getMyApplicationComponent()
+                    .getRetrofitApp()
+                    .create(BiPayPlaceHolderApi.class);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -83,18 +73,6 @@ public class HomeFragment<onViewCreated> extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        ArrayList<CardItem> cardList = new ArrayList<>();
-        cardList.add(new CardItem(R.drawable.uzcard,"UzCard"));
-        cardList.add(new CardItem(R.drawable.humo,"HUMO"));
-        cardList.add(new CardItem(R.drawable.click,"Click UZS"));
-        cardList.add(new CardItem(R.drawable.webmoney,"WebMoney RUB"));
-        cardList.add(new CardItem(R.drawable.webmoney,"WebMoney USD"));
-        cardList.add(new CardItem(R.drawable.qiwi,"Qiwi RUB"));
-        cardList.add(new CardItem(R.drawable.yandex,"Yandex RUB"));
-        cardList.add(new CardItem(R.drawable.beeline,"Beeline 1000 MB UZS"));
-        cardList.add(new CardItem(R.drawable.paynet,"Paynet UZS"));
-        cardList.add(new CardItem(R.drawable.payme,"Payme UZS"));
 
         ArrayList<ReserveCardItem> reserveCardList = new ArrayList<>();
         reserveCardList.add(new ReserveCardItem(R.drawable.uzcard,"UzCard","3000"));
@@ -113,7 +91,7 @@ public class HomeFragment<onViewCreated> extends Fragment {
         cardRecyclerView = view.findViewById(R.id.recyclerview_card);
         cardLayoutManager = new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false);
         cardRecyclerView.setHasFixedSize(true);
-        cardAdapter = new CardAdapter(cardList);
+        cardAdapter = new CardAdapter(getContext(),new ArrayList<PaymentServiceModel>());
         cardRecyclerView.setLayoutManager(cardLayoutManager);
         cardRecyclerView.setAdapter(cardAdapter);
         
@@ -125,8 +103,30 @@ public class HomeFragment<onViewCreated> extends Fragment {
         reserveCardRecyclerView.setLayoutManager(reserveCardLayoutManager);
         reserveCardRecyclerView.setAdapter(reserveCardAdapter);
 
+        //bulldi api ni ishlatasan
 
-        ((MainActivity)getActivity()).openDrawer();
+        api.getpaymentServices().enqueue(new Callback<List<PaymentServiceModel>>() {
+            @Override
+            public void onResponse(Call<List<PaymentServiceModel>> call, Response<List<PaymentServiceModel>> response) {
+                //bu yerda agar response kesa nimadr yozasan adapterga qiymat berasan masalan
+                //sanga service model emas service model listi kelobtiku
+                // shularni hammasini san yozgandin)))
+                //buldi davom ettir man kettim endi nmasini qilish kere hozr id bilan recyclerviewdagi har bitta cardni tanidimi?
+                //ha id si bilan ishlatasan birinchi shularni listga chiqarchi qani ??? qaysi listga chiqaraman postmandagini run qilganda chiqishi keremi
+
+                if (response.isSuccessful() || response.body() != null ){
+                  cardAdapter.addItems(response.body());
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<List<PaymentServiceModel>> call, Throwable t) {
+
+            }
+        });
+
+
 
     }
 

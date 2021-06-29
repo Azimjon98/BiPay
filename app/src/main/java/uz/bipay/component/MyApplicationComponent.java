@@ -12,7 +12,8 @@ import uz.bipay.module.RetrofitModule;
 
 @MyApplicationScope
 @Component(modules = {RetrofitModule.class, GlideModule.class, DataBaseModule.class})
-public interface MyApplicationComponent {
+public interface
+MyApplicationComponent {
 
     @RetrofitAnnotations.RetrofitApp
     Retrofit getRetrofitApp();

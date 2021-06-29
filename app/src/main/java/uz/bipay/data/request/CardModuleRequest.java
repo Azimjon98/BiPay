@@ -1,4 +1,4 @@
-package uz.bipay.data.model;
+package uz.bipay.data.request;
 
 public class CardModuleRequest {
 }

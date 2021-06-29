@@ -26,8 +26,8 @@ import retrofit2.Retrofit;
 import uz.bipay.R;
 import uz.bipay.addition.MySettings;
 import uz.bipay.application.MyApplication;
-import uz.bipay.data.model.LoginRequest;
-import uz.bipay.data.model.response.LoginResponse;
+import uz.bipay.data.request.LoginRequest;
+import uz.bipay.data.response.LoginResponse;
 
 /**
  * A simple {@link Fragment} subclass.

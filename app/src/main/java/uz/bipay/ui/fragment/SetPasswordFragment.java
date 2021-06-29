@@ -23,8 +23,8 @@ import retrofit2.Retrofit;
 import uz.bipay.R;
 import uz.bipay.addition.MySettings;
 import uz.bipay.application.MyApplication;
-import uz.bipay.data.model.SetPasswordRequest;
-import uz.bipay.data.model.response.SetPasswordResponse;
+import uz.bipay.data.request.SetPasswordRequest;
+import uz.bipay.data.response.SetPasswordResponse;
 
 
 public class SetPasswordFragment extends Fragment {
