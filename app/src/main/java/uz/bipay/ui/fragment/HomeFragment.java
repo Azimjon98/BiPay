@@ -130,17 +130,4 @@ public class HomeFragment<onViewCreated> extends Fragment {
 
     }
 
-    public class paidSerive {
-        public int id;
-        public CardModule cardModule;
-        public String name;
-        public String key;
-        public String logo;
-        public int reserve;
-        public int currency_id;
-        public String currencyName;
-        public String  placeHolder;
-    }
-
-
 }
