@@ -1,5 +1,6 @@
 package uz.bipay.ui.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,13 +12,25 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import uz.bipay.Adapter.ReserveCardAdapter;
 import uz.bipay.R;
+import uz.bipay.application.MyApplication;
+import uz.bipay.data.model.PaymentServiceModel;
+import uz.bipay.data.model.ReserveServiceModel;
+import uz.bipay.data.request.ReservedCardRequest;
 import uz.bipay.recyclerView.ReserveCardItem;
-
+import retrofit2.Retrofit;
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link ReserveFragment#newInstance} factory method to
@@ -26,37 +39,21 @@ import uz.bipay.recyclerView.ReserveCardItem;
 public class ReserveFragment extends Fragment {
 
     private RecyclerView reserveCardRecyclerView;
-    private RecyclerView.Adapter reserveCardAdapter;
+    private ReserveCardAdapter reserveCardAdapter;
     private RecyclerView.LayoutManager reserveCardLayoutManager;
+    private BiPayPlaceHolderApi api;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    ImageView selectedCardLogo,reservedToLogo;
+    TextView selectedCardName,reservedPaymentName,reservedToMoney;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     public ReserveFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ReserveFragment.
-     */
     // TODO: Rename and change types and number of parameters
     public static ReserveFragment newInstance(String param1, String param2) {
         ReserveFragment fragment = new ReserveFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
         return fragment;
     }
 
@@ -64,9 +61,13 @@ public class ReserveFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+        try {
+            api =  MyApplication.getInstance()
+                    .getMyApplicationComponent()
+                    .getRetrofitApp()
+                    .create(BiPayPlaceHolderApi.class);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
     }
 
@@ -81,24 +82,52 @@ public class ReserveFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        ArrayList<ReserveCardItem> reserveCardList = new ArrayList<>();
-        reserveCardList.add(new ReserveCardItem(R.drawable.uzcard,"UzCard","3000"));
-        reserveCardList.add(new ReserveCardItem(R.drawable.humo,"HUMO","5000"));
-        reserveCardList.add(new ReserveCardItem(R.drawable.click,"Click UZS","3000"));
-        reserveCardList.add(new ReserveCardItem(R.drawable.webmoney,"WebMoney RUB","5000"));
-        reserveCardList.add(new ReserveCardItem(R.drawable.webmoney,"WebMoney USD","4000"));
-        reserveCardList.add(new ReserveCardItem(R.drawable.qiwi,"Qiwi RUB","2500"));
-        reserveCardList.add(new ReserveCardItem(R.drawable.yandex,"Yandex RUB","3500"));
-        reserveCardList.add(new ReserveCardItem(R.drawable.beeline,"Beeline 1000 MB UZS","4500"));
-        reserveCardList.add(new ReserveCardItem(R.drawable.paynet,"Paynet UZS","4300"));
-        reserveCardList.add(new ReserveCardItem(R.drawable.payme,"Payme UZS","5000"));
+        reservedPaymentName = view.findViewById(R.id.reservedCardName);
+        reservedToMoney = view.findViewById(R.id.reservedMoney);
+        reservedToLogo = view.findViewById(R.id.reservedCardImage);
+
+        ArrayList<ReserveServiceModel> reserveCardList = new ArrayList<>();
 
         reserveCardRecyclerView = view.findViewById(R.id.recycleview_reservedMoney);
         reserveCardLayoutManager = new LinearLayoutManager(getContext());
         reserveCardRecyclerView.setHasFixedSize(true);
-        reserveCardAdapter = new ReserveCardAdapter(reserveCardList);
+        reserveCardAdapter = new ReserveCardAdapter(getContext(),new ArrayList<ReserveServiceModel>());
         reserveCardRecyclerView.setLayoutManager(reserveCardLayoutManager);
         reserveCardRecyclerView.setAdapter(reserveCardAdapter);
 
+        selectedCardLogo = view.findViewById(R.id.selected_reservedCardImage);
+        selectedCardName = view.findViewById(R.id.selected_reservedCardName);
+
+        if (getArguments() != null && getArguments().containsKey("id")){
+            Integer id =getArguments().getInt("id");
+
+            api.getreserveService(id).enqueue(new Callback<List<ReserveServiceModel>>() {
+                @Override
+                public void onResponse(Call<List<ReserveServiceModel>> call, Response<List<ReserveServiceModel>> response) {
+                    if(response.isSuccessful() || response.body() != null){
+                        reserveCardAdapter.addItems(response.body());
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<List<ReserveServiceModel>> call, Throwable t) {
+
+                }
+            });
+        }
+
+        if(getArguments() != null && getArguments().containsKey("name")){
+            String name = getArguments().getString("name");
+            selectedCardName.setText(name);
+        }
+
+        if (getArguments() != null && getArguments().containsKey("logo")){
+            String logo = getArguments().getString("logo");
+            Glide.with(this)
+                    .load(logo)
+                    .into(selectedCardLogo);
+        }
+
     }
+
 }

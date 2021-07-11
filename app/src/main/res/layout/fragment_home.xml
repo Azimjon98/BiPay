@@ -27,9 +27,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/defaultIconColor"
+                android:scrollbars="none"
                 android:id="@+id/recyclerview_card"
-                android:scrollbars="horizontal"
                 android:fadeScrollbars="true"
+                android:overScrollMode="never"
                 app:cardCornerRadius="20dp" />
 
             <TextView
@@ -54,6 +55,7 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/textview_bg"
                 android:id="@+id/recyclerview_reserve"
+                android:overScrollMode="never"
                 android:scrollbars="vertical"
                 android:padding="5dp"
                 android:layout_margin="20dp"

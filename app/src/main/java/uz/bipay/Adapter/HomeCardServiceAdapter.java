@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,28 +20,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 import uz.bipay.R;
-import uz.bipay.addition.MySettings;
 import uz.bipay.data.model.PaymentServiceModel;
-import uz.bipay.recyclerView.CardItem;
 
-public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder> {
+public class HomeCardServiceAdapter extends RecyclerView.Adapter<HomeCardServiceAdapter.CardViewHolder> {
     Context context;
     //CardItem emas PaymentServiceModel qilsan arraylistni ichidami paymentservicemodel? ha
-    private final ArrayList<PaymentServiceModel>CardList;
+    private final ArrayList<PaymentServiceModel> cardList;
 
     private ImageView recycleImage;
 
 
-    public CardAdapter(Context context, ArrayList<PaymentServiceModel> paymentServiceModels) {
+    public HomeCardServiceAdapter(Context context, ArrayList<PaymentServiceModel> paymentServiceModels) {
         this.context = context;
-        CardList = paymentServiceModels;
+        cardList = paymentServiceModels;
 
     }
 
 
 
     public void addItems(@NotNull List<PaymentServiceModel> items) {
-        items.addAll(items);
+        cardList.addAll(items);
         notifyDataSetChanged();
     }
 
@@ -56,7 +53,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull CardViewHolder holder, int position) {
-        PaymentServiceModel currentItem = CardList.get(position);
+        PaymentServiceModel currentItem = cardList.get(position);
         //view ga data berish viewholder ni ichida qilish kere
         holder.onBind(currentItem);
     }
@@ -66,7 +63,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
 
     @Override
     public int getItemCount() {
-        return CardList.size();
+        return cardList.size();
     }
 
     //bu nimaga
@@ -75,7 +72,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
     }
 
     //Keyin ichki klasslar oxirida bulishi kerak eng pastda
-    static class CardViewHolder extends RecyclerView.ViewHolder{
+    class CardViewHolder extends RecyclerView.ViewHolder{
 
         public ImageView cardImage;
         public TextView cardName;
@@ -89,7 +86,11 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Navigation.findNavController(itemView).navigate(R.id.homeFragment_to_reserveFragment);
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("id",cardList.get(getAdapterPosition()).getId());
+                    bundle.putString("logo",cardList.get(getAdapterPosition()).getLogo());
+                    bundle.putString("name",cardList.get(getAdapterPosition()).getName());
+                    Navigation.findNavController(itemView).navigate(R.id.homeFragment_to_reserveFragment,bundle);
                 }
             });
 

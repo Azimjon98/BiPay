@@ -81,7 +81,7 @@
             android:id="@+id/homeFragment_to_reserveFragment"
             app:destination="@id/reserveFragment" />
         <action
-            android:id="@+id/homeFragment_to_exchangeFragment"
+            android:id="@+id/reserveFragment_to_exchangeFragment"
             app:destination="@id/exchangeFragment" />
     </fragment>
     <fragment
@@ -103,7 +103,11 @@
         android:id="@+id/reserveFragment"
         android:name="uz.bipay.ui.fragment.ReserveFragment"
         android:label="fragment_reserve"
-        tools:layout="@layout/fragment_reserve" />
+        tools:layout="@layout/fragment_reserve" >
+        <action
+            android:id="@+id/action_reserveFragment_to_exchangeFragment"
+            app:destination="@id/exchangeFragment" />
+    </fragment>
     <fragment
         android:id="@+id/exchangeFragment"
         android:name="uz.bipay.ui.fragment.ExchangeFragment"

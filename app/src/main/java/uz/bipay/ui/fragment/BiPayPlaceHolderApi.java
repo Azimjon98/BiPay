@@ -6,7 +6,9 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 import uz.bipay.data.model.PaymentServiceModel;
+import uz.bipay.data.model.ReserveServiceModel;
 import uz.bipay.data.request.LoginRequest;
 import uz.bipay.data.request.RegistrationRequest;
 import uz.bipay.data.request.ResetPasswordRequest;
@@ -17,7 +19,6 @@ import uz.bipay.data.response.RegistrationResponse;
 import uz.bipay.data.response.ResetPasswordResponse;
 import uz.bipay.data.response.SetPasswordResponse;
 import uz.bipay.data.response.VerificationResponse;
-import uz.bipay.module.CardModule;
 
 public interface BiPayPlaceHolderApi {
     @POST("login/registration")
@@ -33,14 +34,15 @@ public interface BiPayPlaceHolderApi {
     //@POST("app/create-applications")
    // Call<PaymentResponseServices> paymentRequest(@Body PaymentRequest body);
 
-    @GET("/additional/payment-service")
-    public Call<List<PaymentServiceModel>> getpaymentServices ();
+    @GET("additional/payment-service")
+     Call<List<PaymentServiceModel>> getpaymentServices ();
 
 
     //request da hech narsa bumidi degani metod ichida hech narsa bumid
 //buldi shunaqa qib ishlatasan
     //response keladimi endib boldimi? shu respose
 
+    @GET ("additional/tariffs-list-items?id=1")
+    Call<List<ReserveServiceModel>> getreserveService(@Query("id") int id);
 
-    Call<CardModule> services();
 }

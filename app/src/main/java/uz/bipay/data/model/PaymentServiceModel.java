@@ -79,4 +79,18 @@ public class PaymentServiceModel implements Serializable {
     public void setPlaceHolder(String placeHolder) {
         this.placeHolder = placeHolder;
     }
+
+    @Override
+    public String toString() {
+        return "PaymentServiceModel{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", key='" + key + '\'' +
+                ", logo='" + logo + '\'' +
+                ", reserve=" + reserve +
+                ", currency_id=" + currency_id +
+                ", currencyName='" + currencyName + '\'' +
+                ", placeHolder='" + placeHolder + '\'' +
+                '}';
+    }
 }

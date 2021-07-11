@@ -3,7 +3,7 @@ package uz.bipay.data.request;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class ResetPasswordRequest {
+public class    ResetPasswordRequest {
     @Expose
     @SerializedName("login")
     String login;
